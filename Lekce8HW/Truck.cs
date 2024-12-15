@@ -3,14 +3,12 @@ using System.Drawing;
 
 public class Truck : Vehicle , IDriveable
 {
-    public required string Type { get; set; }
+    public string Type { get; }
     public bool Load { get; set; }
-    public int LoadWeight {  get; set; }
 	public Truck(int id, int type)
 	{
         ID = id;
         Load = false;
-        LoadWeight = 0;
         switch (type) // garbage, construction, heavy-load, ice, sand
         {
             case 0:
@@ -32,18 +30,21 @@ public class Truck : Vehicle , IDriveable
         }
     }
     
-    public override void Repaint(Color color) 
-    { 
+    public override void Repaint(KnownColor color) 
+    {
+        VehicleColor = color;
     }
     public void Drive(int distance)
     {
         Mileage += distance;
     }
-    public void EngineOnOff() 
+    public override void EngineOnOff() 
     {                         
         if (EngineStatus == false)
         {
+            Console.WriteLine("Diesel Injected...");
             Console.WriteLine("Engine is STARTING...");
+            Console.WriteLine("Optimus Prime ready to roll...");
             EngineStatus = !EngineStatus;
         }
         else
@@ -53,11 +54,18 @@ public class Truck : Vehicle , IDriveable
         }
 
     }
+    public void LoadUp()
+    {
+        Load = true;
+    }
+    public void LoadOff()
+    {
+        Load = false;
+    }
 
-    private
     public override string ToString()
     {
-        return "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| VehicleColor = " + VehicleColor + "| Type = " + Type + "|\n"; 
+        return "Truck " + "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| Type = " + Type + "| Loaded? = " + Load + "| Color = " + VehicleColor + "\n"; 
     }
 
     

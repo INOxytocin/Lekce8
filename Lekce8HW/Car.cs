@@ -3,7 +3,7 @@ using System.Drawing;
 
 public class Car : Vehicle , IDriveable
 {
-    public required string Type { get; set; }
+    public string Type { get; }
 	public Car(int id, int type)
 	{
         ID = id;
@@ -24,24 +24,27 @@ public class Car : Vehicle , IDriveable
             case 4:
                 Type = "special";
                 break;
+            default:
+                throw new ArgumentException("Invalid car type");
 
         }
 
     }
     
-    public override void Repaint(Color color) 
+    public override void Repaint(KnownColor color) 
     {
-
+        VehicleColor = color;
     }
     public void Drive(int distance)
     {
         Mileage += distance;
     }
-    public void EngineOnOff() 
+    public override void EngineOnOff() 
     {                         
         if (EngineStatus == false)
         {
             Console.WriteLine("Engine is STARTING...");
+            Console.WriteLine("Autobot" + ID + "ready to protect");
             EngineStatus = !EngineStatus;
         }
         else
@@ -53,7 +56,7 @@ public class Car : Vehicle , IDriveable
     }
     public override string ToString()
     {
-        return "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| VehicleColor = " + VehicleColor + "| Purpose = " + Type + "|\n"; 
+        return "Car " + "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| Purpose = " + Type + "| Color = " + VehicleColor + "|\n"; 
     }
     // rodinné, terénní, závodní, víceúčelové, speciální
     

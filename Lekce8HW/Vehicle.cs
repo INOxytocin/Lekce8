@@ -7,17 +7,23 @@ public abstract class Vehicle
 	protected int ID { get; set; }
 
 	protected bool EngineStatus { get; set; }
-	protected Color VehicleColor { get; set; }
+	protected KnownColor VehicleColor { get; set; }
+	protected KnownColor[] _collorPallete = { KnownColor.Orange, KnownColor.Blue, KnownColor.Brown, KnownColor.Yellow, KnownColor.Red };
+	public KnownColor ColorPallete(int i)
+	{
+		return _collorPallete[i];
+	}
 
 
-	public Vehicle()
+
+    public Vehicle()
 	{
         EngineStatus = false;
         Mileage = 0;
-		VehicleColor = Color.Black;
+		VehicleColor = KnownColor.Black;
     }
 
-	public abstract void Repaint(Color color);
+	public abstract void Repaint(KnownColor color);
 	public virtual void EngineOnOff()	//Asi určitě by bylo lepší udělat 2 rozdílné funkce a už vůbec ne dávat zhasnutí motoru do ELSE místo ELSE IF.
     {									//Navíc jsem si chtěl vyzkoušet pracovat s obrácením bool hodnot pomocí !. A obecně řešit problémy, které s tímto přístupem nastanou.
 		if (EngineStatus == false)

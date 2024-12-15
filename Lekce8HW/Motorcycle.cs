@@ -3,7 +3,7 @@ using System.Drawing;
 
 public class Motorcycle : Vehicle , IDriveable
 {
-    public required string Type { get; set; }
+    public string Type { get; }
 	public Motorcycle(int id, int type) 
     {
         ID = id;
@@ -28,18 +28,20 @@ public class Motorcycle : Vehicle , IDriveable
         }
     }
     
-    public override void Repaint(Color color) 
-    { 
+    public override void Repaint(KnownColor color) 
+    {
+        VehicleColor = color;
     }
     public void Drive(int distance)
     {
         Mileage += distance;
     }
-    public void EngineOnOff() 
+    public override void EngineOnOff() 
     {                         
         if (EngineStatus == false)
         {
             Console.WriteLine("Engine is STARTING...");
+            Console.WriteLine("DECEPTICON "+ ID +" ARMED");
             EngineStatus = !EngineStatus;
         }
         else
@@ -51,7 +53,7 @@ public class Motorcycle : Vehicle , IDriveable
     }
     public override string ToString()
     {
-        return "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| VehicleColor = " + VehicleColor + "| Type = " + Type + "|\n"; 
+        return "Motorcycle " + "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| Type = " + Type + "| Color = " + VehicleColor + "|\n"; 
     }
     //závodní, harley, minibike, cross, quadbike
     //racing, harley, minibike, cross, quadbike
