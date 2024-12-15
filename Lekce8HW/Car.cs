@@ -7,22 +7,22 @@ public class Car : Vehicle , IDriveable
 	public Car(int id, int type)
 	{
         ID = id;
-        switch (type) // family, off-road, racing, multipurpose, special
+        switch (type) 
         {
             case 0:
-                Type = "family";
+                Type = "Protector";
                 break;
             case 1:
-                Type = "off-road";
+                Type = "Scout";
                 break;
             case 2:
-                Type = "racing";
+                Type = "Artillery";
                 break;
             case 3:
-                Type = "multipurpose";
+                Type = "Undercover";
                 break;
             case 4:
-                Type = "special";
+                Type = "Peacekeeper";
                 break;
             default:
                 throw new ArgumentException("Invalid car type");
@@ -31,7 +31,7 @@ public class Car : Vehicle , IDriveable
 
     }
     
-    public override void Repaint(KnownColor color) 
+    public override void Repaint(ConsoleColor color) 
     {
         VehicleColor = color;
     }
@@ -43,21 +43,39 @@ public class Car : Vehicle , IDriveable
     {                         
         if (EngineStatus == false)
         {
-            Console.WriteLine("Engine is STARTING...");
-            Console.WriteLine("Autobot" + ID + "ready to protect");
             EngineStatus = !EngineStatus;
         }
         else
         {
-            Console.WriteLine("Engine SHUT DOWN");
             EngineStatus = !EngineStatus;
         }
 
     }
-    public override string ToString()
+    public string DetailsWithColor() //Vše je vypasné v barvě auta
     {
-        return "Car " + "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| Purpose = " + Type + "| Color = " + VehicleColor + "|\n"; 
+        Console.ForegroundColor = VehicleColor;
+        if (EngineStatus) 
+        {
+             return "Autobot| " + "ID = " + ID + " READY TO PROTECT" +     "|\n"+  "| Mileage = " + Mileage + "| Purpose = " + Type + "|\n";
+        }
+        else if (!EngineStatus)
+        {
+            return "Autobot| " + "ID = " + ID + " STAND BY" + "|\n" + "| Mileage = " + Mileage + "| Purpose = " + Type + "|\n";
+        }
+        else
+        {
+            return "Failed";
+        }
+        Console.ForegroundColor = ConsoleColor.White;
+
+
     }
-    // rodinné, terénní, závodní, víceúčelové, speciální
-    
+    public override void PrintDetails()// Nevymyslel jsem jiný způsob, jak znovu vrátit zpět bílou barvu
+    {
+        Console.WriteLine(DetailsWithColor()); ;
+        Console.ForegroundColor = ConsoleColor.White;
+
+    }
+
+
 }

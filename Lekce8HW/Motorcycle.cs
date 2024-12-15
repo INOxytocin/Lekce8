@@ -7,28 +7,28 @@ public class Motorcycle : Vehicle , IDriveable
 	public Motorcycle(int id, int type) 
     {
         ID = id;
-        switch (type) //racing, harley, minibike, cross, quadbike
+        switch (type) 
         {
             case 0:
-                Type = "racing";
+                Type = "Land-Melee";
                 break;
             case 1:
-                Type = "harley";
+                Type = "Land-Ranged";
                 break;
             case 2:
-                Type = "minibike";
+                Type = "Airbound-Ranged";
                 break;
             case 3:
-                Type = "cross";
+                Type = "Airbound-Bombarder";
                 break;
             case 4:
-                Type = "quadbike";
+                Type = "Spionage";
                 break;
 
         }
     }
     
-    public override void Repaint(KnownColor color) 
+    public override void Repaint(ConsoleColor color) 
     {
         VehicleColor = color;
     }
@@ -40,21 +40,38 @@ public class Motorcycle : Vehicle , IDriveable
     {                         
         if (EngineStatus == false)
         {
-            Console.WriteLine("Engine is STARTING...");
-            Console.WriteLine("DECEPTICON "+ ID +" ARMED");
+            
             EngineStatus = !EngineStatus;
         }
         else
         {
-            Console.WriteLine("Engine SHUT DOWN");
             EngineStatus = !EngineStatus;
         }
 
     }
-    public override string ToString()
+    public string DetailsWithColor()
     {
-        return "Motorcycle " + "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| Type = " + Type + "| Color = " + VehicleColor + "|\n"; 
+        Console.ForegroundColor = VehicleColor;
+        if (EngineStatus)
+        {
+            return "Decepticol| " + "ID = " + ID + " READY TO DESTROY" + "|\n" + "| Mileage = " + Mileage + "| Purpose = " + Type + "|\n";
+        }
+        else if (!EngineStatus)
+        {
+            return "Decepticon| " + "ID = " + ID + " STAND BY" + "|\n" + "| Mileage = " + Mileage + "| Purpose = " + Type + "|\n";
+        }
+        else
+        {
+            return "Failed";
+        }
+        Console.ForegroundColor = ConsoleColor.White;
+
     }
-    //závodní, harley, minibike, cross, quadbike
-    //racing, harley, minibike, cross, quadbike
+    public override void PrintDetails()
+    {
+        Console.WriteLine(DetailsWithColor()); ;
+        Console.ForegroundColor = ConsoleColor.White;
+
+    }
+
 }

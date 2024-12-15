@@ -9,28 +9,28 @@ public class Truck : Vehicle , IDriveable
 	{
         ID = id;
         Load = false;
-        switch (type) // garbage, construction, heavy-load, ice, sand
+        switch (type) 
         {
             case 0:
-                Type = "garbage";
+                Type = "Optimus Prime";
                 break;
             case 1:
-                Type = "construction";
+                Type = "Prime Nova";
                 break;
             case 2:
-                Type = "heavy-load";
+                Type = "Rodimus Prime";
                 break;
             case 3:
-                Type = "ice";
+                Type = "Alpha Prime";
                 break;
             case 4:
-                Type = "sand";
+                Type = "Zeta Prime";
                 break;
 
         }
     }
     
-    public override void Repaint(KnownColor color) 
+    public override void Repaint(ConsoleColor color) 
     {
         VehicleColor = color;
     }
@@ -42,14 +42,10 @@ public class Truck : Vehicle , IDriveable
     {                         
         if (EngineStatus == false)
         {
-            Console.WriteLine("Diesel Injected...");
-            Console.WriteLine("Engine is STARTING...");
-            Console.WriteLine("Optimus Prime ready to roll...");
             EngineStatus = !EngineStatus;
         }
         else
         {
-            Console.WriteLine("Engine SHUT DOWN");
             EngineStatus = !EngineStatus;
         }
 
@@ -63,11 +59,30 @@ public class Truck : Vehicle , IDriveable
         Load = false;
     }
 
-    public override string ToString()
+    public string DetailsWithColor()
     {
-        return "Truck " + "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| Type = " + Type + "| Loaded? = " + Load + "| Color = " + VehicleColor + "\n"; 
+        Console.ForegroundColor = VehicleColor;
+        if (EngineStatus)
+        {
+            return "Prime| " + "ID = " + ID + " READY TO LEAD" + "|\n" + "| Mileage = " + Mileage + "| Name = " + Type + "Civilians on board? " + Load + "|\n";
+        }
+        else if (!EngineStatus)
+        {
+            return "Prime| " + "ID = " + ID + " STAND BY" + "|\n" + "| Mileage = " + Mileage + "| Name = " + Type + "Civilians on board? " + Load + "|\n";
+        }
+        else 
+        {
+            return "Failed";
+        }
+
+    }
+    public override void PrintDetails()
+    {
+        Console.WriteLine(DetailsWithColor()); ;
+        Console.ForegroundColor = ConsoleColor.White;
+
     }
 
-    
+
 }
 
