@@ -1,37 +1,35 @@
 ﻿using System;
 using System.Drawing;
 
-public class Car : Vehicle , IDriveable
+public class Motorcycle : Vehicle , IDriveable
 {
     public required string Type { get; set; }
-	public Car(int id, int type)
-	{
+	public Motorcycle(int id, int type) 
+    {
         ID = id;
-        switch (type) // family, off-road, racing, multipurpose, special
+        switch (type) //racing, harley, minibike, cross, quadbike
         {
             case 0:
-                Type = "family";
-                break;
-            case 1:
-                Type = "off-road";
-                break;
-            case 2:
                 Type = "racing";
                 break;
+            case 1:
+                Type = "harley";
+                break;
+            case 2:
+                Type = "minibike";
+                break;
             case 3:
-                Type = "multipurpose";
+                Type = "cross";
                 break;
             case 4:
-                Type = "special";
+                Type = "quadbike";
                 break;
 
         }
-
     }
     
     public override void Repaint(Color color) 
-    {
-
+    { 
     }
     public void Drive(int distance)
     {
@@ -53,8 +51,8 @@ public class Car : Vehicle , IDriveable
     }
     public override string ToString()
     {
-        return "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| VehicleColor = " + VehicleColor + "| Purpose = " + Type + "|\n"; 
+        return "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| VehicleColor = " + VehicleColor + "| Type = " + Type + "|\n"; 
     }
-    // rodinné, terénní, závodní, víceúčelové, speciální
-    
+    //závodní, harley, minibike, cross, quadbike
+    //racing, harley, minibike, cross, quadbike
 }

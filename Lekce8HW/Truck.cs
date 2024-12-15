@@ -1,37 +1,39 @@
 ﻿using System;
 using System.Drawing;
 
-public class Car : Vehicle , IDriveable
+public class Truck : Vehicle , IDriveable
 {
     public required string Type { get; set; }
-	public Car(int id, int type)
+    public bool Load { get; set; }
+    public int LoadWeight {  get; set; }
+	public Truck(int id, int type)
 	{
         ID = id;
-        switch (type) // family, off-road, racing, multipurpose, special
+        Load = false;
+        LoadWeight = 0;
+        switch (type) // garbage, construction, heavy-load, ice, sand
         {
             case 0:
-                Type = "family";
+                Type = "garbage";
                 break;
             case 1:
-                Type = "off-road";
+                Type = "construction";
                 break;
             case 2:
-                Type = "racing";
+                Type = "heavy-load";
                 break;
             case 3:
-                Type = "multipurpose";
+                Type = "ice";
                 break;
             case 4:
-                Type = "special";
+                Type = "sand";
                 break;
 
         }
-
     }
     
     public override void Repaint(Color color) 
-    {
-
+    { 
     }
     public void Drive(int distance)
     {
@@ -51,10 +53,13 @@ public class Car : Vehicle , IDriveable
         }
 
     }
+
+    private
     public override string ToString()
     {
-        return "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| VehicleColor = " + VehicleColor + "| Purpose = " + Type + "|\n"; 
+        return "ID = " + ID + "| Engine = " + EngineStatus + "| Mileage = " + Mileage + "| VehicleColor = " + VehicleColor + "| Type = " + Type + "|\n"; 
     }
-    // rodinné, terénní, závodní, víceúčelové, speciální
+
     
 }
+

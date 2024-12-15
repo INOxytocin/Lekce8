@@ -2,10 +2,6 @@
 
 public interface IDriveable
 {
-	public void Drive()
-	{
-		
-	}
-	public void EngineOnOff()
-	{ }
+	public void Drive(int distance);
+	public void EngineOnOff();
 }

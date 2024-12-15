@@ -12,7 +12,10 @@ public abstract class Vehicle
 
 	public Vehicle()
 	{
-	}
+        EngineStatus = false;
+        Mileage = 0;
+		VehicleColor = Color.Black;
+    }
 
 	public abstract void Repaint(Color color);
 	public virtual void EngineOnOff()	//Asi určitě by bylo lepší udělat 2 rozdílné funkce a už vůbec ne dávat zhasnutí motoru do ELSE místo ELSE IF.
