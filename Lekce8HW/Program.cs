@@ -4,7 +4,26 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+
+            IDriveable[] driveables = new IDriveable[5];
+            for (int i = 0; i < driveables.Length; i++) 
+            {
+                driveables[i] = new Car(i);
+            }
+            for (int i = 0; i < driveables.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    driveables[i].EngineOnOff();
+                }
+            }
+            for (int i = 0; i < driveables.Length; i++)
+            {
+                Console.WriteLine(driveables[i]);
+            }
+
+
+            Console.ReadKey(); 
         }
     }
 }
